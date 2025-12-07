@@ -1,0 +1,536 @@
+﻿<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ahmet Can Akkaya | Portfolyo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=Fraunces:wght@700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0c0a16;
+      --panel:#151325;
+      --muted:#c9d1e6;
+      --text:#f6f7ff;
+      --line:rgba(255,255,255,0.14);
+      --accent:#b4ff5c;
+      --accent-2:#7bd3ff;
+      --accent-3:#ff8fb1;
+      --body-bg:radial-gradient(120% 120% at 16% 18%,#1a1a36 0%,#0f0d22 46%,#070615 100%);
+      --header-bg:rgba(12,10,22,0.9);
+    }
+    body[data-theme="light"]{
+      --bg:#fdf7ff;
+      --panel:#ffffff;
+      --muted:#5b6070;
+      --text:#0f172a;
+      --line:rgba(15,23,42,0.12);
+      --accent:#4caf50;
+      --accent-2:#4f9bff;
+      --accent-3:#ff6fa8;
+      --body-bg:radial-gradient(120% 120% at 20% 12%,#fff3fb 0%,#f7f9ff 45%,#eef4ff 100%);
+      --header-bg:rgba(255,255,255,0.9);
+    }
+    *{box-sizing:border-box;}
+    body{
+      margin:0;
+      background:var(--body-bg);
+      color:var(--text);
+      font-family:'Sora','Inter',system-ui,-apple-system,sans-serif;
+      line-height:1.6;
+      scroll-behavior:smooth;
+      position:relative;
+      overflow-x:hidden;
+    }
+    body::before,body::after{
+      content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;
+      background:radial-gradient(34% 34% at 78% 12%,rgba(123,211,255,0.22),transparent 52%),
+                  radial-gradient(30% 30% at 18% 82%,rgba(180,255,92,0.18),transparent 55%),
+                  linear-gradient(130deg,rgba(255,143,177,0.16),transparent 60%);
+      mix-blend-mode:screen;opacity:0.82;
+    }
+    a{text-decoration:none;color:inherit;}
+    img{max-width:100%;display:block;}
+    .wrap{max-width:1200px;margin:0 auto;padding:0 24px;position:relative;}
+    header{position:sticky;top:0;z-index:10;backdrop-filter:blur(14px);background:var(--header-bg);border-bottom:1px solid var(--line);}
+    .topbar{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px 0;}
+    .brand{font-weight:700;font-size:18px;letter-spacing:-0.2px;display:flex;align-items:center;gap:8px;}
+    .brand span{color:var(--accent-2);}  
+    nav ul{display:flex;gap:14px;list-style:none;margin:0;padding:0;align-items:center;flex-wrap:wrap;}
+    nav a{padding:10px 14px;border-radius:12px;transition:all .2s;border:1px solid transparent;color:var(--muted);}    
+    nav a:hover{border-color:var(--line);color:#fff;background:rgba(255,255,255,0.04);}
+    .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 18px;border-radius:14px;font-weight:600;border:1px solid var(--line);transition:all .2s;cursor:pointer;background:rgba(255,255,255,0.03);color:var(--text);}
+    .btn.primary{background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#0c111c;border:none;box-shadow:0 18px 40px rgba(0,0,0,0.35);}
+    .btn.ghost{background:rgba(255,255,255,0.03);color:var(--text);}    
+    .btn.small{padding:10px 12px;font-size:14px;}
+    .btn:hover{transform:translateY(-2px);box-shadow:0 14px 40px rgba(0,0,0,0.28);}    
+    section{padding:90px 0;position:relative;}
+    .section-head{max-width:760px;margin-bottom:32px;}
+    .section-head h2{margin:8px 0 10px;font-size:34px;letter-spacing:-1px;font-family:'Fraunces',serif;}
+    .section-head p{color:var(--muted);margin:0;}
+    .eyebrow{color:var(--accent);text-transform:uppercase;letter-spacing:1px;font-size:13px;font-weight:700;margin:0;display:flex;align-items:center;gap:10px;}
+    .eyebrow::after{content:"";height:1px;flex:1;background:linear-gradient(90deg,var(--accent),transparent);opacity:0.6;}
+    .hero{display:grid;grid-template-columns:1.05fr 0.95fr;gap:50px;align-items:center;min-height:78vh;}
+    .hero h1{font-size:50px;letter-spacing:-1.4px;margin:10px 0 16px;font-family:'Fraunces',serif;line-height:1.08;}
+    .hero h1 span{color:var(--accent-2);}
+    .lede{color:var(--muted);max-width:600px;}
+    .cta-row{display:flex;gap:12px;margin:22px 0 14px;flex-wrap:wrap;}
+    .chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px;}
+    .chips span{border:1px solid var(--line);padding:8px 12px;border-radius:999px;color:var(--muted);font-size:14px;background:rgba(255,255,255,0.03);}    
+    .stat-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;margin-top:22px;}
+    .stat{padding:14px 16px;border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,0.03);box-shadow:0 16px 40px rgba(0,0,0,0.25);}
+    .stat strong{display:block;font-size:24px;}
+    .stat small{color:var(--muted);}    
+    .availability{display:inline-flex;align-items:center;gap:10px;padding:10px 14px;border:1px solid var(--line);border-radius:999px;background:rgba(255,255,255,0.04);color:var(--muted);font-size:14px;}
+    .availability span{width:10px;height:10px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 8px rgba(126,252,255,0.15);}    
+    .hero-media{position:relative;justify-self:end;}
+    .portrait{position:relative;width:min(420px,100%);aspect-ratio:1/1;border-radius:999px;overflow:hidden;padding:12px;background:radial-gradient(circle at 30% 30%,rgba(255,159,104,0.2),rgba(126,252,255,0.16));border:1px solid var(--line);box-shadow:0 24px 90px rgba(0,0,0,0.42);}    
+    .portrait img{width:100%;height:100%;object-fit:cover;border-radius:50%;}
+    .badge{position:absolute;left:14px;bottom:14px;background:rgba(12,18,36,0.9);border:1px solid var(--line);padding:12px 14px;border-radius:12px;font-size:13px;box-shadow:0 10px 30px rgba(0,0,0,0.35);}    
+    .badge strong{color:var(--accent-2);}    
+    .ring{position:absolute;inset:-10px;border-radius:50%;border:1px dashed rgba(162,139,255,0.45);opacity:0.5;animation:spin 18s linear infinite;}
+    .ring:nth-child(3){inset:-26px;opacity:0.26;animation-duration:26s;}    
+    @keyframes spin{to{transform:rotate(360deg);}}
+    .panel{background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:24px;box-shadow:0 18px 50px rgba(0,0,0,0.32);}    
+    .grid{display:grid;gap:20px;}
+    .grid.two{grid-template-columns:repeat(auto-fit,minmax(280px,1fr));}
+    .grid.three{grid-template-columns:repeat(auto-fit,minmax(240px,1fr));}
+    .card{background:rgba(255,255,255,0.02);border:1px solid var(--line);border-radius:18px;padding:22px;box-shadow:0 16px 40px rgba(0,0,0,0.28);}    
+    .card h3{margin:0 0 10px;font-size:20px;font-family:'Sora',sans-serif;}
+    .card p{color:var(--muted);margin:6px 0;}
+    .card ul{padding-left:18px;margin:4px 0 0;color:var(--muted);}    
+    .pill-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px;}
+    .pill{background:rgba(255,255,255,0.05);color:#fff;padding:8px 12px;border-radius:10px;font-size:14px;border:1px solid var(--line);}    
+    .skills{display:grid;gap:14px;}
+    .skill{padding:14px 16px;border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,0.02);}    
+    .skill-top{display:flex;justify-content:space-between;font-weight:600;margin-bottom:6px;}
+    .bar{position:relative;height:10px;background:#0a1025;border-radius:999px;overflow:hidden;border:1px solid var(--line);}    
+    .bar span{display:block;height:100%;background:linear-gradient(90deg,var(--accent),var(--accent-2));}
+    .image-card img{width:100%;height:220px;object-fit:cover;border-radius:12px;border:1px solid var(--line);}    
+    .portfolio .tile h4{margin:10px 0 6px;}
+    .portfolio .tile small{color:var(--muted);}    
+    .list{display:grid;gap:12px;margin:10px 0 0;padding:0;list-style:none;}
+    .list li{color:var(--muted);padding:10px 12px;border:1px solid var(--line);border-radius:12px;background:rgba(255,255,255,0.02);}    
+    .process{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px;margin-top:18px;}
+    .step{padding:18px;border:1px solid var(--line);border-radius:16px;background:rgba(255,255,255,0.03);position:relative;overflow:hidden;}
+    .step::before{content:attr(data-step);position:absolute;top:12px;right:12px;font-weight:700;color:var(--muted);background:rgba(255,255,255,0.06);border:1px solid var(--line);border-radius:10px;padding:4px 10px;font-size:12px;}
+    .step h4{margin:0 0 8px;font-size:18px;}
+    .step p{margin:0;color:var(--muted);}    
+    .feature-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-top:16px;}
+    .feature{position:relative;overflow:hidden;border-radius:16px;border:1px solid var(--line);background:rgba(255,255,255,0.03);padding:18px;box-shadow:0 14px 40px rgba(0,0,0,0.25);}    
+    .feature img{width:100%;height:160px;object-fit:cover;border-radius:12px;border:1px solid var(--line);margin-top:10px;}
+    .feature h4{margin:0 0 6px;}
+    .feature p{margin:0;color:var(--muted);}    
+    .logos{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:14px;align-items:center;margin:14px 0 18px;}
+    .logo{padding:14px;border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,0.02);text-align:center;color:var(--muted);font-weight:600;letter-spacing:0.2px;}
+    .logo small{display:block;color:var(--muted);font-weight:400;}
+    .testimonial{margin-top:16px;display:grid;grid-template-columns:1fr;gap:14px;}
+    .quote{padding:18px;border:1px solid var(--line);border-radius:16px;background:rgba(255,255,255,0.03);box-shadow:0 14px 50px rgba(0,0,0,0.25);}    
+    .quote p{margin:0;color:var(--muted);}    
+    .quote strong{color:#fff;display:block;margin-bottom:6px;}
+    .contact .card{height:100%;}
+    .contact-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:18px;}
+    .map iframe{width:100%;height:100%;min-height:260px;border:0;border-radius:12px;}
+    .social-links{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px;}
+    .social-links a{padding:10px 12px;border:1px solid var(--line);border-radius:10px;color:var(--text);}    
+    .contact form{display:grid;gap:12px;}
+    .input-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;}
+    .contact label{display:block;font-weight:600;font-size:14px;margin-bottom:6px;color:var(--text);}
+    .contact input,.contact textarea{width:100%;padding:12px 12px;border-radius:12px;border:1px solid var(--line);background:rgba(255,255,255,0.03);color:var(--text);font-size:15px;}
+    .contact textarea{min-height:140px;resize:vertical;}
+    .contact input:focus,.contact textarea:focus{outline:2px solid rgba(126,252,255,0.35);border-color:var(--accent);}
+    .form-note{color:var(--muted);font-size:13px;}
+    .contact-grid .form-card{grid-column:span 1;}
+    .contact-grid .map{grid-column:span 1;}
+    .contact-grid .full-span{grid-column:span 2;}
+    @media(max-width:780px){.contact-grid .form-card,.contact-grid .map,.contact-grid .full-span{grid-column:auto;}}
+    .form-status{font-size:14px;margin-top:6px;color:var(--muted);}
+    .form-status.success{color:var(--accent);}
+    .form-status.error{color:var(--accent-2);}
+    .quick-card{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;background:linear-gradient(120deg,rgba(126,252,255,0.14),rgba(162,139,255,0.12));border:1px solid var(--line);box-shadow:0 16px 40px rgba(0,0,0,0.25);}
+    .quick-card .info{display:grid;gap:6px;}
+    .badge-chip{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,0.04);font-size:14px;color:var(--text);}
+    body[data-theme="light"] .badge-chip{background:rgba(15,23,42,0.05);}
+    .theme-toggle{border:1px solid var(--line);background:rgba(255,255,255,0.05);}
+    .cta-band{margin:40px 0 10px;padding:18px;border-radius:16px;background:linear-gradient(120deg,rgba(126,252,255,0.14),rgba(162,139,255,0.12));border:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;}
+    footer{border-top:1px solid var(--line);padding:26px 0;color:var(--muted);}    
+    footer .brand{display:flex;align-items:center;gap:8px;}
+    @media(max-width:1040px){.hero{grid-template-columns:1fr;gap:40px;}.hero-media{justify-self:start;}}
+    @media(max-width:780px){nav ul{display:none;}.hero h1{font-size:40px;}section{padding:70px 0;}.cta-band{flex-direction:column;align-items:flex-start;}}
+  </style>
+</head>
+<body>
+  <!-- Version: v12 -->
+  <header>
+    <div class="wrap topbar">
+      <div class="brand">Ahmet <span>Can</span> Akkaya</div>
+      <nav>
+        <ul>
+          <li><a href="#anasayfa">Anasayfa</a></li>
+          <li><a href="#hakkimda">Hakkımda</a></li>
+          <li><a href="#yeteneklerim">Yetenekler</a></li>
+          <li><a href="#portfolyom">Portfolyo</a></li>
+          <li><a href="#hizmetlerim">Hizmetler</a></li>
+          <li><a href="#iletisim">İletişim</a></li>
+        </ul>
+      </nav>
+      <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+        <button class="btn ghost small theme-toggle" type="button" id="theme-toggle">🌙 / ☀️</button>
+        <a class="btn ghost" href="#iletisim">İletişim</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section id="anasayfa" class="hero">
+      <div>
+        <div class="availability"><span></span>Müsait: yeni proje ve danışmanlık</div>
+        <p class="eyebrow">Dijital Pazarlama &amp; Ön Uç</p>
+        <h1>Markaların <span>görünürlüğünü</span> yükselten stratejiler ve arayüzler.</h1>
+        <p class="lede">SEO, performans pazarlama ve modern web arayüzleriyle ölçülebilir büyüme sağlıyor, kampanyaları veriyle besleyip hızlı iterasyonlarla optimize ediyorum.</p>
+        <div class="cta-row">
+          <a class="btn primary" href="#hizmetlerim">Projelerime bak</a>
+          <a class="btn ghost" href="#iletisim">Takvim ayarla</a>
+        </div>
+        <div class="chips">
+          <span>SEO / SEM</span><span>WordPress</span><span>Front-end</span><span>Analitik</span><span>Kampanya Tasarımı</span>
+        </div>
+        <div class="stat-row">
+          <div class="stat"><strong>5+</strong><small>Yıl deneyim</small></div>
+          <div class="stat"><strong>40+</strong><small>Proje ve kampanya</small></div>
+          <div class="stat"><strong>8</strong><small>Sertifika &amp; eğitmenlik</small></div>
+          <div class="stat"><strong>Ankara</strong><small>Uzaktan / Hibrit</small></div>
+        </div>
+      </div>
+      <div class="hero-media">
+        <div class="portrait">
+          <span class="ring"></span>
+          <span class="ring"></span>
+          <img src="ahmetcan.jpg" alt="Ahmet Can Akkaya">
+          <div class="badge"><small>Konum</small><br><strong>Ankara</strong></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="hakkimda">
+      <div class="section-head">
+        <p class="eyebrow">Kendimi tanıtayım</p>
+        <h2>Hakkımda</h2>
+        <p>Merhaba, ben Ahmet Can Akkaya. Dijital pazarlama stratejileri, veri odaklı optimizasyon ve modern web arayüzleri tasarlıyorum. Markaların görünürlüğünü ve dönüşümünü artıran uçtan uca çözümler üretiyorum.</p>
+      </div>
+      <div class="grid two">
+        <article class="card">
+          <h3>Eğitim</h3>
+          <p><strong>Aksaray Üniversitesi</strong><br>Yönetim Bilişim Sistemleri (2017 - 2021)</p>
+          <p style="margin-top:6px;"><strong>GPA:</strong> 3.03 / 4.00</p>
+        </article>
+        <article class="card">
+          <h3>Konferans ve Eğitimler</h3>
+          <ul>
+            <li>IEEE ODTÜ Çevrimiçi Geliştirme Günleri</li>
+            <li>Dijital Pazarlama &amp; SEO atölyeleri</li>
+            <li>Google Ads / Analytics sertifika çalışmaları</li>
+            <li>UI/UX ve içerik stratejisi seminerleri</li>
+          </ul>
+        </article>
+      </div>
+      <div class="grid two" style="margin-top:18px;">
+        <article class="card">
+          <h3>Odak Alanlar</h3>
+          <div class="pill-row">
+            <span class="pill">Performans pazarlama</span>
+            <span class="pill">SEO &amp; içerik</span>
+            <span class="pill">WordPress</span>
+            <span class="pill">Veri analizi</span>
+          </div>
+        </article>
+        <article class="card">
+          <h3>Yaklaşım</h3>
+          <ul class="list">
+            <li>Hızlı deney, ölçüm ve optimizasyon döngüsü</li>
+            <li>İçerik, reklam ve arayüzü aynı hikayede buluşturma</li>
+            <li>Şeffaf raporlama ve net hedef KPI'ları</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section id="hizmetlerim">
+      <div class="section-head">
+        <p class="eyebrow">Hizmetler</p>
+        <h2>Birlikte neler yapabiliriz?</h2>
+        <p>Dijitalde görünür ve ölçülebilir sonuç üreten çözümler tasarlıyorum.</p>
+      </div>
+      <div class="grid three">
+        <article class="card image-card">
+          <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1200&q=80" alt="Web tasarım">
+          <div style="margin-top:12px;">
+            <h3>Web Tasarım</h3>
+            <p>HTML, CSS, JavaScript ve WordPress ile modern, hızlı ve SEO dostu arayüzler.</p>
+          </div>
+        </article>
+        <article class="card image-card">
+          <img src="https://images.unsplash.com/photo-1492724441997-5dc865305da7?auto=format&fit=crop&w=1200&q=80" alt="Sosyal medya yönetimi">
+          <div style="margin-top:12px;">
+            <h3>Sosyal Medya</h3>
+            <p>Platform bazlı içerik takvimi, reklam optimizasyonu, raporlama ve büyüme stratejileri.</p>
+          </div>
+        </article>
+        <article class="card">
+          <h3>Performans ve Analitik</h3>
+          <p>Google Ads, Analytics, Search Console ve ısı haritalarıyla tam görünürlük.</p>
+          <ul class="list">
+            <li>Veri temelli kampanya kurgusu</li>
+            <li>A/B testleri ve mikro dönüşüm takibi</li>
+            <li>Dashboard ve aylık rapor setleri</li>
+          </ul>
+        </article>
+      </div>
+      <div class="process">
+        <div class="step" data-step="01">
+          <h4>Keşif &amp; hedef</h4>
+          <p>Hedef KPI, kitle ve rekabet analizi; yol haritası ve sprint planı.</p>
+        </div>
+        <div class="step" data-step="02">
+          <h4>Üretim</h4>
+          <p>İçerik, yaratıcı setler, ölçüm kurulumu; prototip ve onay döngüsü.</p>
+        </div>
+        <div class="step" data-step="03">
+          <h4>Test &amp; optimize</h4>
+          <p>A/B testleri, bütçe dağılımı, hız ve UX iyileştirmeleri.</p>
+        </div>
+        <div class="step" data-step="04">
+          <h4>Raporlama</h4>
+          <p>Net dashboard, aksiyon listesi ve sonraki sprint için öneriler.</p>
+        </div>
+      </div>
+      <div class="feature-grid">
+        <div class="feature">
+          <h4>Web tasarım paketi</h4>
+          <p>Hızlı açılan, SEO ve analitik kurulu landing / kurumsal site.</p>
+          <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80" alt="Web tasarım örneği">
+        </div>
+        <div class="feature">
+          <h4>Sosyal medya kreatifleri</h4>
+          <p>Çapraz platform hikaye, kısa video ve görsel setleri.</p>
+          <img src="https://images.unsplash.com/photo-1454165205744-3b78555e5572?auto=format&fit=crop&w=1200&q=80" alt="Sosyal medya görseli">
+        </div>
+      </div>
+    </section>
+
+    <section id="portfolyom">
+      <div class="section-head">
+        <p class="eyebrow">Portfolyo</p>
+        <h2>Öne çıkan projeler</h2>
+        <p>Strateji, içerik ve arayüzü birleştiren seçili çalışmalar.</p>
+      </div>
+      <div class="grid three portfolio">
+        <article class="card tile">
+          <h4>Kurumsal Site</h4>
+          <small>WordPress · SEO optimizasyonu</small>
+          <p style="color:var(--muted);">Hızlı açılan, içerik odaklı kurumsal site tasarımı.</p>
+        </article>
+        <article class="card tile">
+          <h4>Landing Page</h4>
+          <small>A/B test · Google Ads</small>
+          <p style="color:var(--muted);">Dönüşüm odaklı kampanya sayfası ve raporlama.</p>
+        </article>
+        <article class="card tile">
+          <h4>Sosyal Medya Kiti</h4>
+          <small>İçerik takvimi · Görsel üretim</small>
+          <p style="color:var(--muted);">Çok kanallı içerik üretimi ve aylık performans takibi.</p>
+        </article>
+      </div>
+      <div class="cta-band">
+        <div>
+          <strong>Yeni projeler için takvimde yer açıyorum.</strong>
+          <p style="margin:4px 0 0;color:var(--muted);">Hedef ve KPI'larınızı paylaşın, birlikte yol haritası çıkaralım.</p>
+        </div>
+        <a class="btn primary" href="mailto:ahmetcanakkaya2022@gmail.com">E-posta gönder</a>
+      </div>
+    </section>
+
+    <section id="referanslar">
+      <div class="section-head">
+        <p class="eyebrow">Güven</p>
+        <h2>Birlikte çalıştığım markalar &amp; yorumlar</h2>
+        <p>Farklı sektörlerden ekiplerle net hedefler ve sıkı iterasyonlarla çalıştım.</p>
+      </div>
+      <div class="logos">
+        <div class="logo">SaaS<span aria-hidden="true"> • </span><small>SEO &amp; İçerik</small></div>
+        <div class="logo">E-ticaret<span aria-hidden="true"> • </span><small>Growth &amp; Ads</small></div>
+        <div class="logo">B2B<span aria-hidden="true"> • </span><small>Lead Gen</small></div>
+        <div class="logo">Startup<span aria-hidden="true"> • </span><small>Landing &amp; UI</small></div>
+      </div>
+      <div class="testimonial">
+        <div class="quote">
+          <strong>“3 ayda organik trafiği %60 büyüttük, MQL hedefini aştık.”</strong>
+          <p>İçerik planı + teknik SEO + sayfa hız optimizasyonu ile sürdürülebilir büyüme sağladık.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="yeteneklerim">
+      <div class="section-head">
+        <p class="eyebrow">Yetkinlik</p>
+        <h2>Teknik &amp; stratejik kaslar</h2>
+        <p style="color:var(--muted);">Yüzdeleri ihtiyaca göre kolayca güncelleyebilirsin.</p>
+      </div>
+      <div class="grid two">
+        <div class="skill">
+          <div class="skill-top"><span>SEO / SEM</span><span>90%</span></div>
+          <div class="bar"><span style="width:90%"></span></div>
+        </div>
+        <div class="skill">
+          <div class="skill-top"><span>WordPress</span><span>85%</span></div>
+          <div class="bar"><span style="width:85%"></span></div>
+        </div>
+        <div class="skill">
+          <div class="skill-top"><span>HTML / CSS / JS</span><span>88%</span></div>
+          <div class="bar"><span style="width:88%"></span></div>
+        </div>
+        <div class="skill">
+          <div class="skill-top"><span>Analitik &amp; Raporlama</span><span>80%</span></div>
+          <div class="bar"><span style="width:80%"></span></div>
+        </div>
+        <div class="skill">
+          <div class="skill-top"><span>Python</span><span>30%</span></div>
+          <div class="bar"><span style="width:30%"></span></div>
+        </div>
+        <div class="skill">
+          <div class="skill-top"><span>C#</span><span>50%</span></div>
+          <div class="bar"><span style="width:50%"></span></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="iletisim" class="contact">
+      <div class="section-head">
+        <p class="eyebrow">İletişim</p>
+        <h2>Hadi konuşalım</h2>
+        <p>Proje fikrinizi veya ihtiyaçlarınızı paylaşın; en kısa sürede dönüş yapayım.</p>
+      </div>
+      <div class="contact-grid">
+        <article class="card form-card">
+          <h3>Mesaj bırak</h3>
+          <form id="contact-form" action="https://formspree.io/f/mvgeqgpj" method="POST">
+            <div class="input-row">
+              <label>Ad Soyad
+                <input type="text" name="name" placeholder="Adınız Soyadınız" required>
+              </label>
+              <label>E-posta
+                <input type="email" name="email" placeholder="ornek@mail.com" required>
+              </label>
+            </div>
+            <div class="input-row">
+              <label>Telefon (opsiyonel)
+                <input type="tel" name="phone" placeholder="+90 5xx xxx xx xx">
+              </label>
+              <label>Konu
+                <input type="text" name="subject" placeholder="Proje, danışmanlık, teklif...">
+              </label>
+            </div>
+            <label>Mesajınız
+              <textarea name="message" placeholder="Kısaca ihtiyacınızı yazın." required></textarea>
+            </label>
+            <input type="hidden" name="_subject" value="Portfolyo iletişim formu">
+            <input type="hidden" name="kaynak" value="ahmetcan-portfolio">
+            <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+              <button class="btn primary" type="submit">Mesaj gönder</button>
+              <span class="form-note">Gönder'e bastığınızda mesaj doğrudan e-postama düşer.</span>
+            </div>
+            <div class="form-status" id="form-status" role="status" aria-live="polite"></div>
+          </form>
+        </article>
+        <article class="card map">
+          <iframe loading="lazy" src="https://maps.google.com/maps?q=Ankara%20%2FTurkey&t=m&z=9&output=embed&iwloc=near" title="Ankara"></iframe>
+        </article>
+        <article class="card quick-card full-span">
+          <div class="info">
+            <div class="badge-chip">Hızlı ulaşım</div>
+            <h3 style="margin:4px 0;">Telefon, e-posta ya da takvim</h3>
+            <p style="margin:0;color:var(--muted);">Kısa bir not bırakın ya da doğrudan arayın; aynı gün içinde dönüş yapıyorum.</p>
+            <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:8px;">
+              <span class="badge-chip">E-posta: <a href="mailto:ahmetcanakkaya2022@gmail.com" style="color:inherit;">ahmetcanakkaya2022@gmail.com</a></span>
+              <span class="badge-chip">Konum: Ankara / Türkiye</span>
+              <a class="badge-chip" href="#anasayfa">Takvim ayarla</a>
+            </div>
+          </div>
+          <a class="btn primary" href="mailto:ahmetcanakkaya2022@gmail.com">Hemen e-posta gönder</a>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap" style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
+      <div class="brand">Ahmet <span>Can</span> Akkaya</div>
+      <p style="margin:0;">Copyright © 2025 Ahmet Can Akkaya</p>
+    </div>
+  </footer>
+  <script>
+    const bodyEl = document.body;
+    const themeToggle = document.getElementById('theme-toggle');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+    const savedTheme = localStorage.getItem('theme');
+    const initialTheme = savedTheme || (prefersDark.matches ? 'dark' : 'light');
+
+    const applyTheme = (theme) => {
+      bodyEl.dataset.theme = theme;
+      if (themeToggle) {
+        themeToggle.textContent = theme === 'dark' ? '🌙 Gece' : '☀️ Gündüz';
+      }
+    };
+
+    applyTheme(initialTheme);
+
+    if (themeToggle) {
+      themeToggle.addEventListener('click', () => {
+        const nextTheme = bodyEl.dataset.theme === 'dark' ? 'light' : 'dark';
+        localStorage.setItem('theme', nextTheme);
+        applyTheme(nextTheme);
+      });
+    }
+
+    const form = document.getElementById('contact-form');
+    const status = document.getElementById('form-status');
+    if (form) {
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        status.textContent = '';
+        status.className = 'form-status';
+        const submitBtn = form.querySelector('button[type="submit"]');
+        const originalText = submitBtn.textContent;
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Gönderiliyor...';
+        try {
+          const data = new FormData(form);
+          const response = await fetch(form.action, {
+            method: 'POST',
+            body: data,
+            headers: { 'Accept': 'application/json' }
+          });
+          if (response.ok) {
+            status.textContent = 'Mesajın alındı, en kısa sürede dönüş yapacağım.';
+            status.classList.add('success');
+            form.reset();
+          } else {
+            status.textContent = 'Bir şeyler ters gitti, lütfen tekrar dene veya e-posta gönder.';
+            status.classList.add('error');
+          }
+        } catch (err) {
+          status.textContent = 'Bağlantı hatası, lütfen daha sonra tekrar dene.';
+          status.classList.add('error');
+        } finally {
+          submitBtn.disabled = false;
+          submitBtn.textContent = originalText;
+        }
+      });
+    }
+  </script>
+</body>
+</html>
+
+
+
